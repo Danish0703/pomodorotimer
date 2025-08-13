@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Pro - Master Your Focus</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon">🍅</div>
+                <h1>Pomodoro Pro</h1>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="timer">Timer</button>
+                <button class="nav-tab" data-tab="technique">Technique</button>
+                <button class="nav-tab" data-tab="analytics">Analytics</button>
+                <button class="nav-tab" data-tab="settings">Settings</button>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Timer Panel -->
+            <section class="panel timer-panel active" id="timer-panel">
+                <div class="timer-section">
+                    <div class="timer-header">
+                        <div class="session-info">
+                            <span class="session-number">Session #<span id="session-count">1</span></span>
+                            <div class="mode-indicator">
+                                <span id="current-mode">Focus Time</span>
+                                <div class="mode-icon">🎯</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timer-display-container">
+                        <div class="timer-circle">
+                            <svg class="progress-ring" width="400" height="400" viewBox="0 0 400 400">
+                                <defs>
+                                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+                                    </linearGradient>
+                                    <filter id="glow">
+                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                        <feMerge> 
+                                            <feMergeNode in="coloredBlur"/>
+                                            <feMergeNode in="SourceGraphic"/>
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                                <circle class="progress-ring-background" cx="200" cy="200" r="180" />
+                                <circle class="progress-ring-progress" cx="200" cy="200" r="180" filter="url(#glow)" />
+                            </svg>
+                            
+                            <div class="timer-display">
+                                <div id="time-display">25:00</div>
+                                <div class="timer-subtitle">minutes remaining</div>
+                                <div class="progress-percentage">0%</div>
+                            </div>
+                        </div>
+
+                        <div class="timer-controls">
+                            <button id="start-pause-btn" class="btn btn-primary">
+                                <span class="btn-icon">▶</span>
+                                <span class="btn-text">Start Focus</span>
+                            </button>
+                            <button id="reset-btn" class="btn btn-secondary">
+                                <span class="btn-icon">↻</span>
+                                <span class="btn-text">Reset</span>
+                            </button>
+                            <button id="mode-toggle-btn" class="btn btn-tertiary">
+                                <span class="btn-icon">⏸</span>
+                                <span class="btn-text">Switch to Break</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Information Panel -->
+                <div class="info-sidebar">
+                    <div class="quick-stats">
+                        <h3>Today's Progress</h3>
+                        <div class="stat-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="completed-sessions">0</div>
+                                <div class="stat-label">Completed</div>
+                                <div class="stat-icon">✅</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="total-time">0h 0m</div>
+                                <div class="stat-label">Focus Time</div>
+                                <div class="stat-icon">⏱</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="streak-count">0</div>
+                                <div class="stat-label">Streak</div>
+                                <div class="stat-icon">🔥</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="technique-preview">
+                        <h3>Why Pomodoro Works</h3>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🧠</span>
+                                <span>Improves focus and concentration</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">⚡</span>
+                                <span>Reduces mental fatigue</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">📈</span>
+                                <span>Increases productivity</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🎯</span>
+                                <span>Better time awareness</span>
+                            </div>
+                        </div>
+                        <button class="learn-more-btn" onclick="switchTab('technique')">
+                            Learn More About the Technique
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technique Information Panel -->
+            <section class="panel technique-panel" id="technique-panel">
+                <div class="technique-content">
+                    <div class="technique-hero">
+                        <h2>The Pomodoro Technique</h2>
+                        <p class="technique-subtitle">A time management method developed by Francesco Cirillo in the late 1980s</p>
+                    </div>
+
+                    <div class="technique-grid">
+                        <div class="technique-card">
+                            <div class="card-header">
+                                <h3>🍅 The Origin</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Named after the tomato-shaped kitchen timer that Cirillo used as a university student. "Pomodoro" means tomato in Italian.</p>
+                            </div>
+                        </div>
+
+                        <div class="technique-card">
+                            <div class="card-header">
+                                <h3>⚡ How It Works</h3>
+                            </div>
+                            <div class="card-content">
+                                <ol>
+                                    <li>Choose a task to work on</li>
+                                    <li>Set timer for 25 minutes</li>
+                                    <li>Work until timer rings</li>
+                                    <li>Take a 5-minute break</li>
+                                    <li>Repeat 3 more times</li>
+                                    <li>Take a longer 15-30 minute break</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="technique-card">
+                            <div class="card-header">
+                                <h3>🧠 Scientific Benefits</h3>
+                            </div>
+                            <div class="card-content">
+                                <ul>
+                                    <li><strong>Improved Focus:</strong> Short bursts prevent mental fatigue</li>
+                                    <li><strong>Better Planning:</strong> Forces task estimation</li>
+                                    <li><strong>Reduced Anxiety:</strong> Manageable time chunks</li>
+                                    <li><strong>Enhanced Creativity:</strong> Regular breaks boost innovation</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="technique-card">
+                            <div class="card-header">
+                                <h3>📊 Research Findings</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Studies show that the Pomodoro Technique can increase productivity by up to 40% and reduce stress levels significantly. The method leverages the brain's natural attention cycles.</p>
+                            </div>
+                        </div>
+
+                        <div class="technique-card full-width">
+                            <div class="card-header">
+                                <h3>🎯 Best Practices</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="best-practices-grid">
+                                    <div class="practice-item">
+                                        <strong>Eliminate Distractions:</strong> Turn off notifications, close unnecessary tabs
+                                    </div>
+                                    <div class="practice-item">
+                                        <strong>Plan Your Pomodoros:</strong> Decide what you'll work on before starting
+                                    </div>
+                                    <div class="practice-item">
+                                        <strong>Take Real Breaks:</strong> Step away from your workspace completely
+                                    </div>
+                                    <div class="practice-item">
+                                        <strong>Track Your Progress:</strong> Note completed pomodoros and reflect on productivity
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Panel -->
+            <section class="panel analytics-panel" id="analytics-panel">
+                <div class="analytics-content">
+                    <h2>Your Productivity Analytics</h2>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Weekly Overview</h3>
+                            <div class="chart-placeholder">
+                                <p>📊 Chart visualization would go here</p>
+                                <p>Track your daily pomodoro completion</p>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Focus Patterns</h3>
+                            <div class="chart-placeholder">
+                                <p>⏰ Time-based analytics</p>
+                                <p>Discover your most productive hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Panel -->
+            <section class="panel settings-panel" id="settings-panel">
+                <div class="settings-content">
+                    <h2>Customize Your Experience</h2>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <h3>Timer Settings</h3>
+                            <div class="setting-item">
+                                <label>Focus Duration (minutes)</label>
+                                <input type="number" value="25" min="1" max="60">
+                            </div>
+                            <div class="setting-item">
+                                <label>Short Break (minutes)</label>
+                                <input type="number" value="5" min="1" max="30">
+                            </div>
+                            <div class="setting-item">
+                                <label>Long Break (minutes)</label>
+                                <input type="number" value="15" min="5" max="60">
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <h3>Notifications</h3>
+                            <div class="setting-item">
+                                <label>Sound Notifications</label>
+                                <input type="checkbox" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>Desktop Notifications</label>
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Keyboard Shortcuts Info -->
+        <footer class="app-footer">
+            <div class="shortcuts-info">
+                <span class="shortcut"><kbd>Space</kbd> Start/Pause</span>
+                <span class="shortcut"><kbd>R</kbd> Reset</span>
+                <span class="shortcut"><kbd>F</kbd> Focus Mode</span>
+                <span class="shortcut"><kbd>B</kbd> Break Mode</span>
+                <span class="shortcut"><kbd>Tab</kbd> Switch Panels</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
